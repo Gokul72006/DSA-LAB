@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-// Node structure for doubly linked list
 typedef struct Node {
     int data;
     struct Node* prev;
     struct Node* next;
 } Node;
-// Insert at the beginning
 void insertAtBeginning(Node** head, int value) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = value;
@@ -16,7 +14,6 @@ void insertAtBeginning(Node** head, int value) {
         (*head)->prev = newNode;
     *head = newNode;
 }
-// Insert at the end
 void insertAtEnd(Node** head, int value) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = value;
@@ -32,7 +29,6 @@ void insertAtEnd(Node** head, int value) {
     temp->next = newNode;
     newNode->prev = temp;
 }
-// Display list forward
 void displayForward(Node* head) {
     printf("List forward: ");
     Node* temp = head;
@@ -42,7 +38,6 @@ void displayForward(Node* head) {
     }
     printf("NULL\n");
 }
-// Display list backward
 void displayBackward(Node* head) {
     if (head == NULL) {
         printf("List is empty.\n");
@@ -58,11 +53,8 @@ void displayBackward(Node* head) {
     }
     printf("NULL\n");
 }
-
-// Delete node by value
 void deleteNode(Node** head, int value) {
     Node* temp = *head;
-    // Search for node to delete
     while (temp != NULL && temp->data != value) {
         temp = temp->next;
     }
@@ -70,13 +62,10 @@ void deleteNode(Node** head, int value) {
         printf("Value %d not found in the list.\n", value);
         return;
     }
-    // If node to be deleted is head
     if (*head == temp)
         *head = temp->next;
-    // Update prev node next pointer
     if (temp->prev != NULL)
         temp->prev->next = temp->next;
-    // Update next node prev pointer
     if (temp->next != NULL)
         temp->next->prev = temp->prev;
     free(temp);
@@ -90,10 +79,10 @@ int main() {
     insertAtEnd(&head, 20);
     displayForward(head);
     displayBackward(head);
-
     deleteNode(&head, 15);
     displayForward(head);
     displayBackward(head);
     deleteNode(&head, 100);
     return 0;
 }
+
